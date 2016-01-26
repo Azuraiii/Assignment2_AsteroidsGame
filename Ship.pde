@@ -6,10 +6,17 @@ class Ship extends GameObject
   char left;
   char right;
   char fire;
+  int score;
 
   // Constructor!!
   // HAS NO RETURN TYPE
   // Name is always the same as the class
+  
+  void applyTo()
+  {
+    
+  }
+  
   Ship()
   {
     // Constructor chaining. Call a constructor in the super class
@@ -24,6 +31,7 @@ class Ship extends GameObject
     this.right = right;
     this.fire = fire;
     this.c = c;
+    this.score = 0;
   }
 
   int elapsed = 12;
@@ -55,9 +63,11 @@ class Ship extends GameObject
       bullet.pos.add(PVector.mult(forward, 6));
       bullet.c = c;
       bullet.theta = theta;
-      laserz.add(bullet);
+      gameObjects.add(bullet);
       elapsed = 0;
     }
+
+
 
     if (pos.x < 0)
     {
@@ -94,5 +104,4 @@ class Ship extends GameObject
     line(- halfW, halfW, 0, 0);
     popMatrix();
   }
-}
 }

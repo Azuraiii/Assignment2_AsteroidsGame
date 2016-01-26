@@ -15,7 +15,7 @@ abstract class GameObject
   float halfW;
   float speed = 5.0f;
   color c; 
- 
+  
   GameObject()
   {
     // Constructor chaining
@@ -31,7 +31,9 @@ abstract class GameObject
     this.theta = 0.0f;
   }
   
-  abstract void update();  
+  abstract void update();
   abstract void render();
+  
+  
   
 }

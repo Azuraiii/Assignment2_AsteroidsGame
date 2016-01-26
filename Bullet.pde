@@ -1,10 +1,16 @@
-class Bullet extends GameObject
+class Bullet extends GameObject implements Shoot
 {
   
   Bullet()
   {
     speed = 10.0f;
   }
+  
+  void applyTo(Bullet bullet)
+  {
+    
+  }
+  
   
   void render()
   {
