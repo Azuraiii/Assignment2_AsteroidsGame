@@ -65,14 +65,8 @@ void bulletAsteroidCollision()
           {
             rocks.remove(other);
             gameObjects.remove(go);
+            
 
-            if (go.pos.dist(other.pos) < go.halfW + other.halfW)
-            {
-              Asteroid smallerR = new Asteroid();
-              rocks.add(smallerR);
-              smallerR.render2();
-              smallerR.update();
-            }
             /*//Gameover
              text("YOU DIED", width/2-160, height/2); 
              textSize(32); 
@@ -115,11 +109,12 @@ void draw()
     go.update();
     go.render();
   }
-
+  //displays the asteroids
   for (int i = rocks.size()- 1; i>=0; i--)
   {
     Asteroid rock = rocks.get(i);
     rock.render();
     rock.update();
+    rock.render2();
   }
 }

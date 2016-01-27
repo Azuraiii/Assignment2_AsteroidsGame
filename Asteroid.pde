@@ -37,16 +37,6 @@ class Asteroid extends GameObject implements Interface
     popMatrix();
   }
   
-  void render2() 
-  { 
-    pushMatrix();
-    translate(pos.x,pos.y);
-    rotate(theta);
-    //white
-    stroke(255);
-    ellipse(-halfW/2,-halfW/2,w/2,w/2);
-    popMatrix();
-  }
 
   void update()
   {
