@@ -2,6 +2,7 @@
 // The class name always starts with uppercase!!
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
+ArrayList<Asteroid> rocks = new ArrayList<Asteroid>();
 
 void setup()
 {
@@ -10,33 +11,6 @@ void setup()
   gameObjects.add(ship);
 }
 
-/*void bulletAsteroidCollision()
- {
- for (int i = gameObjects.size()-1; i >=0; i--)
- {
- //retrieves the game object from position i
- GameObject go = gameObjects.get(i); 
- //checks to see if instance is a ship
- //checks arraylist for ship
- if (go instanceof Bullet)
- {
- for (int j = gameObjects.size()-1; j >=0; j--)
- {
- GameObject other = gameObjects.get(j);
- //checks arraylist for powerup
- if (other instanceof Asteroid)
- {
- //bounding collisions
- if (go.pos.dist(go.pos)< other.halfW)
- {
- //casting
- ((Asteroid) other).applyTo((Bullet)go);
- }
- }
- }
- }
- }
- }*/
 
 void shipAsteroidCollision()
 {
@@ -48,49 +22,60 @@ void shipAsteroidCollision()
     //checks arraylist for ship
     if (go instanceof Ship)
     {
-      for (int j = gameObjects.size()-1; j >=0; j--)
+      for (int j = rocks.size()-1; j >=0; j--)
       {
-        GameObject other = gameObjects.get(j);
+        Asteroid other = rocks.get(j);
         //checks arraylist for powerup
-        if (other instanceof Asteroid)
+        if (other instanceof Interface)
         {
           //bounding collisions
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
-            
-           // gameObjects.remove(other);
-            //Gameover
-            text("YOU DIED", width/2-160, height/2); 
-            textSize(32); 
-            text("'R' to retry", width/2-160, height/2+32);
-          }
-        }
-      }
-    }
-  }
-
-  for (int j = gameObjects.size()-1; j>=0; j--)
-  {
-    GameObject other = gameObjects.get(j);
-    if (other instanceof Asteroid)
-    {
-      for (int k = gameObjects.size() - 1; k>=0; k--)
-      {
-        GameObject shot = gameObjects.get(k);
-
-        if (shot instanceof Bullet)
-        {
-
-          if (other.pos.dist(shot.pos) < other.halfW)
-          {
-            gameObjects.remove(shot);
-            gameObjects.remove(other);
+            rocks.remove(other);
+            /*//Gameover
+             text("YOU DIED", width/2-160, height/2); 
+             textSize(32); 
+             text("'R' to retry", width/2-160, height/2+32);*/
           }
         }
       }
     }
   }
 }
+
+
+void bulletAsteroidCollision()
+{
+  for (int i = gameObjects.size()-1; i >=0; i--)
+  {
+    //retrieves the game object from position i
+    GameObject go = gameObjects.get(i); 
+    //checks to see if instance is a ship
+    //checks arraylist for ship
+    if (go instanceof Bullet)
+    {
+      for (int j = rocks.size()-1; j >=0; j--)
+      {
+        Asteroid other = rocks.get(j);
+        //checks arraylist for powerup
+        if (other instanceof Shoot)
+        {
+          //bounding collisions
+          if (go.pos.dist(other.pos) < go.halfW + other.halfW)
+          {
+            rocks.remove(other);
+            gameObjects.remove(go);
+            /*//Gameover
+             text("YOU DIED", width/2-160, height/2); 
+             textSize(32); 
+             text("'R' to retry", width/2-160, height/2+32);*/
+          }
+        }
+      }
+    }
+  }
+}
+
 
 boolean[] keys = new boolean[512];
 
@@ -107,20 +92,26 @@ void keyReleased()
 void draw()
 {
   background(0);
+  bulletAsteroidCollision();
+  shipAsteroidCollision();
 
   if (frameCount%120 ==0)
   {
     Asteroid a = new Asteroid();
-    gameObjects.add(a);
+    rocks.add(a);
   }
 
-  for (int i = gameObjects.size() - 1; i >= 0; i --)
+  for (int i = gameObjects.size() -1; i >= 0; i --)
   {
     GameObject go = gameObjects.get(i);
     go.update();
     go.render();
   }
 
-  //bulletAsteroidCollision();
-  shipAsteroidCollision();
+  for (int i = rocks.size()- 1; i>=0; i--)
+  {
+    Asteroid rock = rocks.get(i);
+    rock.render();
+    rock.update();
+  }
 }

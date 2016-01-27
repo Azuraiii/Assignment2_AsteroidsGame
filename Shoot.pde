@@ -1,4 +1,4 @@
 interface Shoot
 {
-  void applyTo(Bullet bullet);
+  void applyTo(Asteroid ast);
 }

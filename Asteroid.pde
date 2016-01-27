@@ -1,4 +1,4 @@
-class Asteroid extends GameObject implements Interface
+class Asteroid extends GameObject implements Interface implements Shoot
 {
 
   float points;
@@ -10,7 +10,11 @@ class Asteroid extends GameObject implements Interface
   void applyTo(Ship ship)
   {
   }
-
+  
+  void applyTo2(Asteroid ast)
+  {
+  }
+  
   Asteroid()
   { 
     super(width * 0.5f, height  * 0.5f, 50);

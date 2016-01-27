@@ -1,4 +1,4 @@
-class Bullet extends GameObject implements Shoot
+class Bullet extends GameObject
 {
   
   Bullet()
