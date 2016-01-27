@@ -1,4 +1,4 @@
-class Asteroid extends GameObject implements Interface implements Shoot
+class Asteroid extends GameObject implements Interface
 {
 
   float points;
@@ -34,6 +34,17 @@ class Asteroid extends GameObject implements Interface implements Shoot
     //white
     stroke(255);
     ellipse(-halfW,-halfW,w,w);
+    popMatrix();
+  }
+  
+  void render2() 
+  { 
+    pushMatrix();
+    translate(pos.x,pos.y);
+    rotate(theta);
+    //white
+    stroke(255);
+    ellipse(-halfW/2,-halfW/2,w/2,w/2);
     popMatrix();
   }
 

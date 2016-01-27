@@ -58,13 +58,21 @@ void bulletAsteroidCollision()
       {
         Asteroid other = rocks.get(j);
         //checks arraylist for powerup
-        if (other instanceof Shoot)
+        if (other instanceof Interface)
         {
           //bounding collisions
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
             rocks.remove(other);
             gameObjects.remove(go);
+
+            if (go.pos.dist(other.pos) < go.halfW + other.halfW)
+            {
+              Asteroid smallerR = new Asteroid();
+              rocks.add(smallerR);
+              smallerR.render2();
+              smallerR.update();
+            }
             /*//Gameover
              text("YOU DIED", width/2-160, height/2); 
              textSize(32); 
