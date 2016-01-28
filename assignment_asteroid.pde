@@ -66,6 +66,8 @@ void bulletAsteroidCollision()
             rocks.remove(other);
             gameObjects.remove(go);
             
+           // smallAsteroid smallA = new smallAsteroid();
+            
 
             /*//Gameover
              text("YOU DIED", width/2-160, height/2); 
@@ -113,8 +115,7 @@ void draw()
   for (int i = rocks.size()- 1; i>=0; i--)
   {
     Asteroid rock = rocks.get(i);
-    rock.render();
-    rock.update();
     rock.render2();
+    rock.update();
   }
 }

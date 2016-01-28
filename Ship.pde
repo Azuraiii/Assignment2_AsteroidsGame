@@ -67,8 +67,6 @@ class Ship extends GameObject
       elapsed = 0;
     }
 
-
-
     if (pos.x < 0)
     {
       pos.x = width;
