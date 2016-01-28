@@ -115,7 +115,7 @@ void draw()
   for (int i = rocks.size()- 1; i>=0; i--)
   {
     Asteroid rock = rocks.get(i);
-    rock.render2();
+    rock.render();
     rock.update();
   }
 }

@@ -33,17 +33,8 @@ class Asteroid extends GameObject implements Interface
   {
   }
 
-  void render2() 
+  void render() 
   { 
-    for (int i = 0; i < 16; i++) 
-    { 
-      // The vertices are generated radially 
-      // A vertice is generated at an angle of 0 with a random distance from the center of the asteroid 
-      // Then the next vertice is PI/8 radians rotated from the previous one and generated with a new random distance from the center 
-      // Ask Lambert, it's a lot easier to explain in person 
-      vertx[i] = sin(i*PI/8)*(s + random(-s/4, s/4)); 
-      verty[i] = cos(i*PI/8)*(s + random(-s/4, s/4));
-    }
     pushMatrix();
     translate(pos.x, pos.y);
     //rotate(theta);
@@ -53,7 +44,6 @@ class Asteroid extends GameObject implements Interface
     strokeWeight(1); 
     rotate(r); 
     // Places the vertices of the polygon 
-    beginShape(); 
     int[] xpts = {
       -20, 0, 18, 22, 5, 20, 17, -3, -17, -18, -26,-20                    };
     int[] ypts = {

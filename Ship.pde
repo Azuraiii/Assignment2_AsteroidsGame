@@ -96,10 +96,10 @@ class Ship extends GameObject
     stroke(c);
     fill(c);
     rotate(theta); // We want rotate to happen first, so you make the call AFTER translate    
-    line(- halfW, halfW, 0, - halfW);
-    line(0, - halfW, halfW, halfW);
-    line(halfW, halfW, 0, 0);
-    line(- halfW, halfW, 0, 0);
+    line(- halfW*0.8, halfW*0.8, 0, - halfW*0.8);
+    line(0, - halfW*0.8, halfW*0.8, halfW*0.8);
+    line(halfW*0.8, halfW*0.8, 0, 0);
+    line(- halfW*0.8, halfW*0.8, 0, 0);
     popMatrix();
   }
 }
