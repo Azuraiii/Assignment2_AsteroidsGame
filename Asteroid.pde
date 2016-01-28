@@ -55,12 +55,12 @@ class Asteroid extends GameObject implements Interface
     // Places the vertices of the polygon 
     beginShape(); 
     int[] xpts = {
-      -20, 0, 18, 22, 5, 20, 17, -3, -17, -18, -26                    };
+      -20, 0, 18, 22, 5, 20, 17, -3, -17, -18, -26,-20                    };
     int[] ypts = {
-      -15, -24, -20, -5, 0, 10, 20, 26, 23, 14, 7                    };
+      -15, -24, -20, -5, 0, 10, 20, 26, 23, 14, 7,-15                    };
 
     beginShape(POLYGON);
-    for(int i = 0; i < 11; i++) {
+    for(int i = 0; i < 12; i++) {
       vertex(xpts[i], ypts[i]);
     }
     endShape(); 
