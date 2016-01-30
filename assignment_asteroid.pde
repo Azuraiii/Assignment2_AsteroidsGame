@@ -5,8 +5,14 @@ ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 ArrayList<Asteroid> rocks = new ArrayList<Asteroid>();
 ArrayList<smallAsteroid> smallRocks = new ArrayList<smallAsteroid>();
 
+public int score = 0;
+public int lives = 1;
+
 void setup()
 {
+
+
+
   size(1000, 1000);
   Ship ship = new Ship('W', 'A', 'D', ' ', 200, height / 2, color(0, 255, 255));
   gameObjects.add(ship);
@@ -64,10 +70,10 @@ void bulletAsteroidCollision()
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
 
-            smallAsteroid smallAst = new smallAsteroid(other.pos);
-            smallAsteroid smallAst2 = new smallAsteroid(other.pos);
-            smallRocks.add(smallAst);
-            smallRocks.add(smallAst2);
+            smallAsteroid sAsteroid = new smallAsteroid(other.pos);
+            smallAsteroid sAsteroid2 = new smallAsteroid(other.pos);
+            smallRocks.add(sAsteroid);
+            smallRocks.add(sAsteroid2);
 
             rocks.remove(other);
             gameObjects.remove(go);
@@ -88,7 +94,7 @@ void bulletSmallAstCollision()
     //checks arraylist for ship
     if (go instanceof Bullet)
     {
-      for (int j = rocks.size()-1; j >=0; j--)
+      for (int j = smallRocks.size()-1; j >=0; j--)
       {
         smallAsteroid smallAst1 = smallRocks.get(j);
         //checks arraylist for powerup
@@ -97,7 +103,23 @@ void bulletSmallAstCollision()
           //bounding collisions
           if (go.pos.dist(smallAst1.pos) < go.halfW + smallAst1.halfW)
           {
-            rocks.remove(smallAst1);
+            smallRocks.remove(smallAst1);
+            gameObjects.remove(go);
+          }
+        }
+      }
+
+      for (int k = smallRocks.size()-1; k >=0; k--)
+      {
+        smallAsteroid smallAst2 = smallRocks.get(k);
+        //checks arraylist for powerup
+        if (smallAst2 instanceof Interface)
+        {
+          //bounding collisions
+          if (go.pos.dist(smallAst2.pos) < go.halfW + smallAst2.halfW)
+          {
+            smallRocks.remove(smallAst2);
+            gameObjects.remove(go);
           }
         }
       }
@@ -127,7 +149,7 @@ void draw()
   shipAsteroidCollision();
   bulletSmallAstCollision();
 
-  if (frameCount%120 ==0)
+  if (score%120 ==0)
   {
     Asteroid a = new Asteroid();
     rocks.add(a);
@@ -145,5 +167,12 @@ void draw()
     Asteroid rock = rocks.get(i);
     rock.render();
     rock.update();
+  }
+
+  for (int i = smallRocks.size()-1; i>=0; i--)
+  {
+    smallAsteroid smallRock = smallRocks.get(i);
+    smallRock.render();
+    smallRock.update();
   }
 }
