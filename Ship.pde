@@ -11,12 +11,11 @@ class Ship extends GameObject
   // Constructor!!
   // HAS NO RETURN TYPE
   // Name is always the same as the class
-  
+
   void applyTo()
   {
-    
   }
-  
+
   Ship()
   {
     // Constructor chaining. Call a constructor in the super class
@@ -96,10 +95,21 @@ class Ship extends GameObject
     stroke(c);
     fill(c);
     rotate(theta); // We want rotate to happen first, so you make the call AFTER translate    
-    line(- halfW*0.8, halfW*0.8, 0, - halfW*0.8);
-    line(0, - halfW*0.8, halfW*0.8, halfW*0.8);
-    line(halfW*0.8, halfW*0.8, 0, 0);
-    line(- halfW*0.8, halfW*0.8, 0, 0);
+    /*line(- halfW*0.8, halfW*0.8, 0, - halfW*0.8);
+     line(0, - halfW*0.8, halfW*0.8, halfW*0.8);
+     line(halfW*0.8, halfW*0.8, 0, 0);
+     line(- halfW*0.8, halfW*0.8, 0, 0);*/
+     
+    // Places the vertices of the polygon 
+    int[] xpts = {
+      0, -10, -30, -30, -5, -5, -2, -2, 2, 2, 5, 5, 30, 30, 10, 0                    };
+    int[] ypts = {
+      40, 5, -10, -13, -5, -10-10, -15-15, -10, -10, -5, -30, -10, 5, 40                };
+    beginShape(POLYGON);
+    for (int i = 0; i < 20; i++) {
+      vertex(xpts[i], ypts[i]);
+    }
+    endShape(); 
     popMatrix();
   }
 }

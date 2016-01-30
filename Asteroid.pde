@@ -8,8 +8,6 @@ class Asteroid extends GameObject implements Interface
   float size;
   float x, y, a, v, r, w, s; 
 
-  float[] vertx = new float[16];
-  float[] verty= new float[16];
 
   void applyTo(Ship ship)
   {
@@ -18,13 +16,12 @@ class Asteroid extends GameObject implements Interface
   void applyTo2(Asteroid ast)
   {
   }
-  
+
   void applyTo3(smallAsteroid smallAst)
   {
-    
   }
-  
-  
+
+
 
   Asteroid()
   { 
@@ -87,5 +84,6 @@ class Asteroid extends GameObject implements Interface
     {
       pos.x = 0;
     }
+
   }
 }

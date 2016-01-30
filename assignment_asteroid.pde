@@ -7,15 +7,22 @@ ArrayList<smallAsteroid> smallRocks = new ArrayList<smallAsteroid>();
 
 public int score = 0;
 public int lives = 1;
+public int launch = 0;
 
 void setup()
 {
 
 
 
-  size(1000, 1000);
+  size(800, 800);
   Ship ship = new Ship('W', 'A', 'D', ' ', 200, height / 2, color(0, 255, 255));
   gameObjects.add(ship);
+
+  //adds 8 starting asteroids
+  for (int i = 0; i < 8; i++)
+  {
+    rocks.add(new Asteroid());
+  }
 }
 
 void shipAsteroidCollision()
@@ -77,6 +84,8 @@ void bulletAsteroidCollision()
 
             rocks.remove(other);
             gameObjects.remove(go);
+
+            score = score + 5;
           }
         }
       }
@@ -105,6 +114,8 @@ void bulletSmallAstCollision()
           {
             smallRocks.remove(smallAst1);
             gameObjects.remove(go);
+
+            score = score + 5;
           }
         }
       }
@@ -120,6 +131,8 @@ void bulletSmallAstCollision()
           {
             smallRocks.remove(smallAst2);
             gameObjects.remove(go);
+
+            score = score + 5;
           }
         }
       }
@@ -149,12 +162,22 @@ void draw()
   shipAsteroidCollision();
   bulletSmallAstCollision();
 
-  if (score%120 ==0)
-  {
-    Asteroid a = new Asteroid();
-    rocks.add(a);
-  }
+  println(score);
+  //generates more asteroids
 
+  textSize(32); 
+  fill(150, 255, 255); 
+  text("Score:" + score, 8, 32); 
+
+  if (launch > 0)
+  {
+    if (score%10== 0)
+    {
+      Asteroid a = new Asteroid();
+      rocks.add(a);
+    }
+  }
+  
   for (int i = gameObjects.size() -1; i >= 0; i --)
   {
     GameObject go = gameObjects.get(i);

@@ -26,15 +26,15 @@ class smallAsteroid extends Asteroid implements Interface
     strokeWeight(1); 
     rotate(r); 
     // Places the vertices of the polygon 
-    int[] xpts = {
+    int[] xpt = {
       -10, 0, 9, 11, 2, 10, 8, -1, -8, -9, -13, -10                    };
-    int[] ypts = {
+    int[] ypt = {
       -7, -12, -10, -2, 0, 5, 10, 13, 11, 7, 4, -7                    };
 
     beginShape(POLYGON);
     for (int i = 0; i < 12; i++) 
     {
-      vertex(xpts[i], ypts[i]);
+      vertex(xpt[i], ypt[i]);
     }
     endShape(); 
     rotate(-r);
