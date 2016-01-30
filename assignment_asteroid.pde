@@ -11,7 +11,6 @@ void setup()
   gameObjects.add(ship);
 }
 
-
 void shipAsteroidCollision()
 {
   for (int i = gameObjects.size()-1; i >=0; i--)
@@ -63,16 +62,30 @@ void bulletAsteroidCollision()
           //bounding collisions
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
+
+            //smallAsteroid smallAst = new smallAsteroid(other.pos);
+            //smallAsteroid smallAst2 = new smallAsteroid(other.pos);
+            
+            //rocks.add(smallAst2);
+
             rocks.remove(other);
             gameObjects.remove(go);
-            
-           // smallAsteroid smallA = new smallAsteroid();
-            
-
-            /*//Gameover
-             text("YOU DIED", width/2-160, height/2); 
-             textSize(32); 
-             text("'R' to retry", width/2-160, height/2+32);*/
+            for (int k = rocks.size()-1; k >=0; j--)
+            {
+      
+              smallAsteroid smallAst = new smallAsteroid(other.pos);
+              smallAsteroid smallAst = rocks.get(k);
+              
+              rocks.add(smallAst);
+              
+              if (smallAst instanceof Interface)
+              {
+                if (go.pos.dist(smallAst.pos) < go.halfW + smallAst.halfW)
+                {
+                  rocks.remove(smallAst);
+                }
+              }
+            }
           }
         }
       }

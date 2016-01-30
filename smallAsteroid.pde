@@ -1,18 +1,23 @@
-class smallAsteroid extends Asteroid
+class smallAsteroid extends Asteroid implements Interface
 {
-  smallAsteroid()
+  smallAsteroid(PVector position)
   {
     forward.x = random(-1, 1);
     forward.y = random(-1, 1);
     //sets the forward vector to 1
     forward.normalize();
-    pos.x = random(0, width);
-    pos.y = random(0, height);
+    pos.x = position.x;
+    pos.y = position.y;
+  }
+  
+  void applyTo3(smallAsteroid smallAst)
+  {
+    
   }
 
   void render() 
   { 
-     pushMatrix();
+    pushMatrix();
     translate(pos.x, pos.y);
     //rotate(theta);
     //white 
@@ -22,12 +27,13 @@ class smallAsteroid extends Asteroid
     rotate(r); 
     // Places the vertices of the polygon 
     int[] xpts = {
-      -20, 0, 18, 22, 5, 20, 17, -3, -17, -18, -26,-20                    };
+      -10, 0, 9, 11, 2, 10, 8, -1, -8, -9, -13, -10                    };
     int[] ypts = {
-      -15, -24, -20, -5, 0, 10, 20, 26, 23, 14, 7,-15                    };
+      -7, -12, -10, -2, 0, 5, 10, 13, 11, 7, 4, -7                    };
 
     beginShape(POLYGON);
-    for(int i = 0; i < 12; i++) {
+    for (int i = 0; i < 12; i++) 
+    {
       vertex(xpts[i], ypts[i]);
     }
     endShape(); 
