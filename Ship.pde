@@ -64,6 +64,8 @@ class Ship extends GameObject
       bullet.theta = theta;
       gameObjects.add(bullet);
       elapsed = 0;
+
+      //create exhaust here
     }
 
     if (pos.x < 0)
@@ -93,21 +95,26 @@ class Ship extends GameObject
     pushMatrix(); // reset the translation and rotation
     translate(pos.x, pos.y);
     stroke(c);
-    fill(c);
+    noFill();
     rotate(theta); // We want rotate to happen first, so you make the call AFTER translate    
     /*line(- halfW*0.8, halfW*0.8, 0, - halfW*0.8);
      line(0, - halfW*0.8, halfW*0.8, halfW*0.8);
      line(halfW*0.8, halfW*0.8, 0, 0);
      line(- halfW*0.8, halfW*0.8, 0, 0);*/
-     
+
     // Places the vertices of the polygon 
-      
-      int[] xpts = {
+
+    /*int[] xpts = {
       0, 10, 30, 30, 5, 5, 2, 2, -2, -2, -5, -5, -30, -30, -10, 0                    };
     int[] ypts = {
-      -40, -5, 10, 13, 5, 10,10, 15,15, 10, 10, 5, 10, 8, -5, -40                };
+      -40, -5, 10, 13, 5, 10, 10, 15, 15, 10, 10, 5, 10, 8, -5, -40                };*/
+      
+      int[] xpts = {
+      0,-15,0,15,0                  };
+    int[] ypts = {
+      -30,10,-5,10,-30};
     beginShape(POLYGON);
-    for (int i = 0; i < 16; i++) {
+    for (int i = 0; i < 5; i++) {
       vertex(xpts[i], ypts[i]);
     }
     endShape(); 

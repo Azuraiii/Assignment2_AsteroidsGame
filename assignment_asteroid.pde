@@ -1,5 +1,6 @@
-// A demo of abstract classes and interfaces
-// The class name always starts with uppercase!!
+import controlP5.*;
+ControlP5 cp5;
+Menu m;
 
 ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 ArrayList<Asteroid> rocks = new ArrayList<Asteroid>();
@@ -9,12 +10,17 @@ public int score = 0;
 public int lives = 1;
 public int launch = 0;
 
+PImage bg;
+
 void setup()
 {
-
-
-
-  size(800, 800);
+  cp5 = new ControlP5(this);
+  m = new Menu();
+  m.setup();
+  
+  size(800, 600);
+  bg = loadImage("img/background.gif");
+  bg.resize(800, 600);
   Ship ship = new Ship('W', 'A', 'D', ' ', 200, height / 2, color(0, 255, 255));
   gameObjects.add(ship);
 
@@ -141,8 +147,6 @@ void bulletSmallAstCollision()
 }
 
 
-
-
 boolean[] keys = new boolean[512];
 
 void keyPressed()
@@ -157,33 +161,55 @@ void keyReleased()
 
 void draw()
 {
-  background(0);
+
+  start_game();
   bulletAsteroidCollision();
   shipAsteroidCollision();
   bulletSmallAstCollision();
 
-  println(score);
-  //generates more asteroids
+  switch(m.mode)
+  {
+    //default
+  case 0: 
+  default:
+    m.show_menu();
+    break;
+    //starts the game
+  case 1:
+    m.hide_menu();
+    break;
+  }
+}
 
+void start_game()
+{
+  //universe background
+  background(bg);
+
+  //score
+  println(score);
   textSize(32); 
   fill(150, 255, 255); 
   text("Score:" + score, 8, 32); 
 
   if (launch > 0)
   {
+    //spawning of asteroids
     if (score%10== 0)
     {
       Asteroid a = new Asteroid();
       rocks.add(a);
     }
   }
-  
+
+  //displays the ship and bullets
   for (int i = gameObjects.size() -1; i >= 0; i --)
   {
     GameObject go = gameObjects.get(i);
     go.update();
     go.render();
   }
+
   //displays the asteroids
   for (int i = rocks.size()- 1; i>=0; i--)
   {
@@ -192,6 +218,7 @@ void draw()
     rock.update();
   }
 
+  //displays the smaller asteroids
   for (int i = smallRocks.size()-1; i>=0; i--)
   {
     smallAsteroid smallRock = smallRocks.get(i);
