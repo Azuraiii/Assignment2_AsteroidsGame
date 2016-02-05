@@ -8,16 +8,17 @@ ArrayList<smallAsteroid> smallRocks = new ArrayList<smallAsteroid>();
 
 public int score = 0;
 public int lives = 1;
-public int launch = 0;
+//counter for loop
+public int check;
 
 PImage bg;
-
+boolean start = false;
 void setup()
 {
   cp5 = new ControlP5(this);
   m = new Menu();
   m.setup();
-  
+
   size(800, 600);
   bg = loadImage("img/background.gif");
   bg.resize(800, 600);
@@ -50,7 +51,7 @@ void shipAsteroidCollision()
           //bounding collisions
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
-            rocks.remove(other);
+            gameObjects.remove(go);
             /*//Gameover
              text("YOU DIED", width/2-160, height/2); 
              textSize(32); 
@@ -162,12 +163,20 @@ void keyReleased()
 void draw()
 {
 
-  start_game();
-  bulletAsteroidCollision();
-  shipAsteroidCollision();
-  bulletSmallAstCollision();
+  if (start == true)
+  {
+    m.hide_menu();
+    start_game();
+    bulletAsteroidCollision();
+    shipAsteroidCollision();
+    bulletSmallAstCollision();
+  }
+  else
+  {
+    m.show_menu();
+  }
 
-  switch(m.mode)
+ /* switch(m.mode)
   {
     //default
   case 0: 
@@ -178,11 +187,12 @@ void draw()
   case 1:
     m.hide_menu();
     break;
-  }
+  }*/
 }
 
 void start_game()
 {
+  
   //universe background
   background(bg);
 
@@ -192,15 +202,13 @@ void start_game()
   fill(150, 255, 255); 
   text("Score:" + score, 8, 32); 
 
-  if (launch > 0)
-  {
-    //spawning of asteroids
-    if (score%10== 0)
+  
+  
+  if (score%5 == 0 && score !=0 && score > check)
     {
-      Asteroid a = new Asteroid();
-      rocks.add(a);
+      check = score;
+      rocks.add(new Asteroid());
     }
-  }
 
   //displays the ship and bullets
   for (int i = gameObjects.size() -1; i >= 0; i --)

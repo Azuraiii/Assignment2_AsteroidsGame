@@ -23,6 +23,14 @@ class Menu
    cp5.getController("Start Game").setVisible(true);
    cp5.getController("View High Score").setVisible(true);
    cp5.getController("Exit Game").setVisible(true);
+   
+   if(mousePressed)
+   {
+     if( mouseX > 200 && mouseX < 575 && mouseY > 220 && mouseY < 270)
+     {
+       start = true;
+     }
+   }
   }
   
   void hide_menu()
@@ -32,7 +40,7 @@ class Menu
     cp5.getController("Exit Game").setVisible(false);
   }
   
-  void controlEvent(ControlEvent ce)
+  /*void controlEvent(ControlEvent ce)
   {
      if(mode ==1)
      {
@@ -42,5 +50,5 @@ class Menu
          hide_menu();
        }
      }
-  }
+  }*/
 }
