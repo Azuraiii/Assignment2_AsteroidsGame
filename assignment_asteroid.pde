@@ -59,6 +59,20 @@ void shipAsteroidCollision()
           }
         }
       }
+
+      for (int k = smallRocks.size()-1; k >=0; k--)
+      {
+        smallAsteroid smallAst2 = smallRocks.get(k);
+        //checks arraylist for powerup
+        if (smallAst2 instanceof Interface)
+        {
+          //bounding collisions
+          if (go.pos.dist(smallAst2.pos) < go.halfW + smallAst2.halfW)
+          {
+            gameObjects.remove(go);
+          }
+        }
+      }
     }
   }
 }
@@ -170,29 +184,28 @@ void draw()
     bulletAsteroidCollision();
     shipAsteroidCollision();
     bulletSmallAstCollision();
-  }
-  else
+  } else
   {
     m.show_menu();
   }
 
- /* switch(m.mode)
-  {
-    //default
-  case 0: 
-  default:
-    m.show_menu();
-    break;
-    //starts the game
-  case 1:
-    m.hide_menu();
-    break;
-  }*/
+  /* switch(m.mode)
+   {
+   //default
+   case 0: 
+   default:
+   m.show_menu();
+   break;
+   //starts the game
+   case 1:
+   m.hide_menu();
+   break;
+   }*/
 }
 
 void start_game()
 {
-  
+
   //universe background
   background(bg);
 
@@ -202,13 +215,13 @@ void start_game()
   fill(150, 255, 255); 
   text("Score:" + score, 8, 32); 
 
-  
-  
-  if (score%5 == 0 && score !=0 && score > check)
-    {
-      check = score;
-      rocks.add(new Asteroid());
-    }
+
+
+  if (score%5 == 10 && score !=0 && score > check)
+  {
+    check = score;
+    rocks.add(new Asteroid());
+  }
 
   //displays the ship and bullets
   for (int i = gameObjects.size() -1; i >= 0; i --)
