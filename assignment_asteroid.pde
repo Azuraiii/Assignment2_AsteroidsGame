@@ -6,6 +6,7 @@ ArrayList<GameObject> gameObjects = new ArrayList<GameObject>();
 ArrayList<Asteroid> rocks = new ArrayList<Asteroid>();
 ArrayList<smallAsteroid> smallRocks = new ArrayList<smallAsteroid>();
 
+
 public int score = 0;
 public int lives = 0;
 //counter for loop
@@ -19,6 +20,7 @@ int highscores = 0;
 
 void setup()
 {
+
   cp5 = new ControlP5(this);
   m = new Menu();
   m.setup();
@@ -38,11 +40,22 @@ void setup()
 
 void loadData()
 {
-  String[] lines = loadStrings("data/highscore.txt");
-
-  for (int i=0; i < lines.length; i++) 
+  String lines[] = loadStrings("data/highscore.txt");
+  
+  //shows data
+  if (highscores == 1)
   {
-    text(". "+lines[i], (width / 2) - 95, (height / 4) + 25 + (i * 15));
+    for (int i=0; i < lines.length; i++) 
+    {
+      text(". "+lines[i], (width / 2) - 95, (height / 4) + 25 + (i * 15));
+    }
+  }
+  
+  // reads data
+  if(lives == 1)
+  {
+    m.show_submit();
+   // lines = cp5.get(Textfield.class,"textInput_2").getText();
   }
 }
 
@@ -67,6 +80,7 @@ void shipAsteroidCollision()
           {
             gameObjects.remove(go);
             lives = 1;
+            loadData();
           }
         }
       }
@@ -81,6 +95,7 @@ void shipAsteroidCollision()
           if (go.pos.dist(smallAst2.pos) < go.halfW + smallAst2.halfW)
           {
             gameObjects.remove(go);
+            
           }
         }
       }
@@ -247,7 +262,7 @@ void start_game()
   fill(150, 255, 255); 
   text("Score:" + score, 8, 32); 
 
-
+  //this spawns more asteroids as the game progresses
   if (score%20 == 0 && score !=0 && score > check)
   {
     check = score;
