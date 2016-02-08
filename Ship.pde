@@ -37,12 +37,13 @@ class Ship extends GameObject
 
   void update()
   {
-    forward.x = sin(theta);
-    forward.y = - cos(theta);
+    forward.x = sin(theta)*1;
+    forward.y = - cos(theta)*1;
     forward.mult(speed);
 
     if (keys[move])
     {
+      
       pos.add(forward);
     }      
     if (keys[left])

@@ -7,12 +7,16 @@ ArrayList<Asteroid> rocks = new ArrayList<Asteroid>();
 ArrayList<smallAsteroid> smallRocks = new ArrayList<smallAsteroid>();
 
 public int score = 0;
-public int lives = 1;
+public int lives = 0;
 //counter for loop
 public int check;
 
+//background image
 PImage bg;
-boolean start = false;
+int start = 0;
+int highscores = 0;
+
+
 void setup()
 {
   cp5 = new ControlP5(this);
@@ -22,13 +26,23 @@ void setup()
   size(800, 600);
   bg = loadImage("img/background.gif");
   bg.resize(800, 600);
-  Ship ship = new Ship('W', 'A', 'D', ' ', 200, height / 2, color(0, 255, 255));
+  Ship ship = new Ship('W', 'A', 'D', ' ', 400, height / 2, color(0, 255, 255));
   gameObjects.add(ship);
 
   //adds 8 starting asteroids
   for (int i = 0; i < 8; i++)
   {
     rocks.add(new Asteroid());
+  }
+}
+
+void loadData()
+{
+  String[] lines = loadStrings("data/highscore.txt");
+
+  for (int i=0; i < lines.length; i++) 
+  {
+    text(". "+lines[i], (width / 2) - 95, (height / 4) + 25 + (i * 15));
   }
 }
 
@@ -52,10 +66,7 @@ void shipAsteroidCollision()
           if (go.pos.dist(other.pos) < go.halfW + other.halfW)
           {
             gameObjects.remove(go);
-            /*//Gameover
-             text("YOU DIED", width/2-160, height/2); 
-             textSize(32); 
-             text("'R' to retry", width/2-160, height/2+32);*/
+            lives = 1;
           }
         }
       }
@@ -176,36 +187,57 @@ void keyReleased()
 
 void draw()
 {
+  if (start == 0)
+  {
+    m.show_menu();
+  }
 
-  if (start == true)
+  if (start == 1)
   {
     m.hide_menu();
     start_game();
     bulletAsteroidCollision();
     shipAsteroidCollision();
     bulletSmallAstCollision();
-  } else
-  {
-    m.show_menu();
   }
 
-  /* switch(m.mode)
-   {
-   //default
-   case 0: 
-   default:
-   m.show_menu();
-   break;
-   //starts the game
-   case 1:
-   m.hide_menu();
-   break;
-   }*/
+  if (start == 3)
+  {
+    m.hide_menu();
+    background(0);
+  }
+
+  if (highscores == 0)
+  {
+    m.hide_highscores();
+  }
+
+
+  if (highscores == 1)
+  {
+    m.show_highscores();
+    loadData();
+  }
+
+  if (lives == 1)
+  {
+    gameOver();
+  }
+}
+
+void gameOver()
+{
+  //Gameover
+  fill(255, 0, 0);
+
+  text("YOU DIED", width/2-40, height/2); 
+  textSize(32); 
+  text("'R' to retry", width/2-40, height/2+32);
+  //textAlign(CENTER);
 }
 
 void start_game()
 {
-
   //universe background
   background(bg);
 
@@ -216,8 +248,7 @@ void start_game()
   text("Score:" + score, 8, 32); 
 
 
-
-  if (score%5 == 10 && score !=0 && score > check)
+  if (score%20 == 0 && score !=0 && score > check)
   {
     check = score;
     rocks.add(new Asteroid());
