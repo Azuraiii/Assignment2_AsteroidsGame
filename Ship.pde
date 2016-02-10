@@ -43,7 +43,7 @@ class Ship extends GameObject
 
     if (keys[move])
     {
-      
+
       pos.add(forward);
     }      
     if (keys[left])
@@ -106,14 +106,14 @@ class Ship extends GameObject
     // Places the vertices of the polygon 
 
     /*int[] xpts = {
-      0, 10, 30, 30, 5, 5, 2, 2, -2, -2, -5, -5, -30, -30, -10, 0                    };
+     0, 10, 30, 30, 5, 5, 2, 2, -2, -2, -5, -5, -30, -30, -10, 0                    };
+     int[] ypts = {
+     -40, -5, 10, 13, 5, 10, 10, 15, 15, 10, 10, 5, 10, 8, -5, -40                };*/
+
+    int[] xpts = {
+      0, -15, 0, 15, 0                  };
     int[] ypts = {
-      -40, -5, 10, 13, 5, 10, 10, 15, 15, 10, 10, 5, 10, 8, -5, -40                };*/
-      
-      int[] xpts = {
-      0,-15,0,15,0                  };
-    int[] ypts = {
-      -30,10,-5,10,-30};
+      -30, 10, -5, 10, -30};
     beginShape(POLYGON);
     for (int i = 0; i < 5; i++) {
       vertex(xpts[i], ypts[i]);
